@@ -5,7 +5,9 @@
         <b-card tag="solicitacoes" class="mb-2 card-eco">
           <b-card-text>
             <b-card-text>
-              <h2>{{ formatarNumero(qt_solicitacoes) }}</h2>
+              <h2 class="text-truncate">
+                {{ formatarNumero(qt_solicitacoes) }}
+              </h2>
               <span>Solicitações</span>
             </b-card-text>
           </b-card-text>
@@ -15,7 +17,9 @@
         <b-card tag="solicitacoes" class="mb-2 card-eco">
           <b-card-text>
             <b-card-text>
-              <h2>{{ formatarNumero(qt_recebimentos) }}</h2>
+              <h2 class="text-truncate">
+                {{ formatarNumero(qt_recebimentos) }}
+              </h2>
               <span>Recebimentos</span>
             </b-card-text>
           </b-card-text>
@@ -24,7 +28,9 @@
       <b-col cols="3">
         <b-card tag="recebimentos" class="mb-2 card-eco">
           <b-card-text>
-            <h2>{{ formatarNumero(total_ecorecebido) }}</h2>
+            <h2 class="text-truncate">
+              {{ formatarNumero(total_ecorecebido) }}
+            </h2>
             <span>Total Eco Recebido</span>
           </b-card-text>
         </b-card>
@@ -32,7 +38,9 @@
       <b-col cols="3">
         <b-card tag="eco" class="mb-2 card-eco">
           <b-card-text>
-            <h2>{{ formatarNumero(total_realrecebido, 2) }}</h2>
+            <h2 class="text-truncate">
+              {{ formatarNumero(total_realrecebido, 2) }}
+            </h2>
             <span>Total em R$ Recebido</span>
           </b-card-text>
         </b-card>

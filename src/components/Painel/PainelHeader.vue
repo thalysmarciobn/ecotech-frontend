@@ -10,19 +10,30 @@
         <b-nav-item to="/gerar-solicitacao">Gerar Solicitação</b-nav-item>
         <b-nav-item to="/produtos">Loja de Produtos</b-nav-item>
       </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item
+          >Saldo: <b>{{ formatarNumero(saldoEco) }}</b></b-nav-item
+        >
+        <b-nav-item-dropdown :text="bemVindo" right>
+          <b-dropdown-item to="/enderecos">Endereços</b-dropdown-item>
+          <b-dropdown-item to="/configuracoes">Configurações</b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item @click="mudarSair()">Sair</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
     </b-collapse>
-    <b-navbar-nav class="ml-auto">
-      <b-nav-item
-        >Saldo: <b>{{ formatarNumero(saldoEco) }}</b></b-nav-item
-      >
-      <b-nav-item-dropdown :text="bemVindo" right>
-        <b-dropdown-item to="/enderecos">Endereços</b-dropdown-item>
-        <b-dropdown-item to="/configuracoes">Configurações</b-dropdown-item>
-        <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item @click="null">Sair</b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
   </b-navbar>
+  <b-modal v-model="sairModal" hide-header hide-footer>
+    <h2 class="text-break text-center mt-3 mb-5">Você deseja sair?</h2>
+    <b-button-group style="width: 100%">
+      <b-button @click="executarSair()" variant="outline-success"
+        >Sair</b-button
+      >
+      <b-button @click="mudarSair()" variant="outline-danger"
+        >Cancelar</b-button
+      >
+    </b-button-group>
+  </b-modal>
 </template>
 
 <script lang="ts">
@@ -34,6 +45,7 @@ import User from "@/types/User";
 
 export default class AppHeaderMenu extends Vue {
   private userModule: UserModule = getModule(UserModule, store);
+  public sairModal: boolean = false;
 
   get bemVindo(): string {
     return "Bem-vindo(a): " + this.userModule.user?.nm_usuario;
@@ -45,6 +57,17 @@ export default class AppHeaderMenu extends Vue {
 
   get usuario(): User | null {
     return this.userModule.user;
+  }
+
+  mudarSair(): void {
+    this.sairModal = !this.sairModal;
+  }
+
+  executarSair(): void {
+    this.$cookies.set("chave", "", "1h");
+    this.userModule.setUser(null);
+    this.$router.push("login");
+    this.sairModal = false;
   }
 
   formatarNumero(valor: number, minimumFractionDigits: number = 0): string {
@@ -75,5 +98,10 @@ export default class AppHeaderMenu extends Vue {
 
 .navbar.bg-green .navbar-nav .active.nav-link {
   color: #fff !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #669d19 !important;
 }
 </style>
