@@ -17,7 +17,13 @@
       </b-table>
     </b-row>
   </b-col>
-  <b-modal id="modal-endereco" size="lg" v-model="modalAberto" title="Endereço">
+  <b-modal
+    id="modal-endereco"
+    size="lg"
+    v-model="modalAberto"
+    title="Endereço"
+    hide-footer
+  >
     <template #default="{}">
       <b-container fluid>
         <b-row class="mt-3 mb-3">

@@ -86,6 +86,8 @@ export default class Produtos extends Vue {
         this.msg = `Foi debitado <b>${data.debitado}</b> da sua conta, seu novo saldo é <b>${data.saldo}</b>`;
       } else if (data.codigo === "produto_sem_estoque") {
         this.msg = `<b>${data.nm_produto}</b> está fora de estoque`;
+      } else if (data.codigo === "saldo_insuficiente") {
+        this.msg = `Saldo insuficiente para comprar <b>${data.nm_produto}</b>`;
       }
       this.carregarProdutos();
     });

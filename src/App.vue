@@ -55,4 +55,9 @@ export default class App extends Vue {
   border-radius: 10px !important;
   background: #fff;
 }
+
+.alert {
+  border: 2px solid #00000012 !important;
+  border-radius: 0 !important;
+}
 </style>

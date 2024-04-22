@@ -12,7 +12,9 @@
       </b-navbar-nav>
     </b-collapse>
     <b-navbar-nav class="ml-auto">
-      <b-nav-item>Saldo: {{ saldoEco }}</b-nav-item>
+      <b-nav-item
+        >Saldo: <b>{{ formatarNumero(saldoEco) }}</b></b-nav-item
+      >
       <b-nav-item-dropdown :text="bemVindo" right>
         <b-dropdown-item to="/enderecos">Endereços</b-dropdown-item>
         <b-dropdown-item to="/configuracoes">Configurações</b-dropdown-item>
@@ -43,6 +45,13 @@ export default class AppHeaderMenu extends Vue {
 
   get usuario(): User | null {
     return this.userModule.user;
+  }
+
+  formatarNumero(valor: number, minimumFractionDigits: number = 0): string {
+    const valorCentavos = Math.round(valor * 100);
+    return (valorCentavos / 100).toLocaleString("pt-BR", {
+      minimumFractionDigits: minimumFractionDigits,
+    });
   }
 }
 </script>

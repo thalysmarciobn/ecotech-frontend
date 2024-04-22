@@ -5,7 +5,7 @@
         <b-card tag="solicitacoes" class="mb-2 card-eco">
           <b-card-text>
             <b-card-text>
-              <h1>{{ formatarNumero(qt_solicitacoes) }}</h1>
+              <h2>{{ formatarNumero(qt_solicitacoes) }}</h2>
               <span>Solicitações</span>
             </b-card-text>
           </b-card-text>
@@ -15,7 +15,7 @@
         <b-card tag="solicitacoes" class="mb-2 card-eco">
           <b-card-text>
             <b-card-text>
-              <h1>{{ formatarNumero(qt_recebimentos) }}</h1>
+              <h2>{{ formatarNumero(qt_recebimentos) }}</h2>
               <span>Recebimentos</span>
             </b-card-text>
           </b-card-text>
@@ -24,7 +24,7 @@
       <b-col cols="3">
         <b-card tag="recebimentos" class="mb-2 card-eco">
           <b-card-text>
-            <h1>{{ formatarNumero(total_ecorecebido) }}</h1>
+            <h2>{{ formatarNumero(total_ecorecebido) }}</h2>
             <span>Total Eco Recebido</span>
           </b-card-text>
         </b-card>
@@ -32,8 +32,8 @@
       <b-col cols="3">
         <b-card tag="eco" class="mb-2 card-eco">
           <b-card-text>
-            <h1>{{ formatarNumero(total_realrecebido, 2) }} R$</h1>
-            <span>Total Recebido</span>
+            <h2>{{ formatarNumero(total_realrecebido, 2) }}</h2>
+            <span>Total em R$ Recebido</span>
           </b-card-text>
         </b-card>
       </b-col>
@@ -140,14 +140,17 @@ export default class Painel extends Vue {
     const chave = this.$cookies.get("chave");
     if (!chave) return;
     if (this.carregando === true) return;
-    this.carregando = true;
+
+    clearTimeout(this.timeout);
+
     if (this.proximaPagina !== null) {
-      await UserService.solicitacoes(
+      var dadoRecebido = await UserService.solicitacoes(
         chave,
         proximaPagina ? this.proximaPagina : this.pagina,
         this.porPagina,
         this.pesquisa
       ).then((data: any) => {
+        console.log(data);
         if (data.codigo == "recebido") {
           this.paginaTotal = data.dados.total_paginas;
           this.proximaPagina = data.dados.proxima_pagina;

@@ -1,103 +1,118 @@
 <template>
-  <b-col cols="12">
-    <div
-      v-if="msg != ''"
-      role="alert"
-      aria-live="polite"
-      aria-atomic="true"
-      class="alert alert-info"
-    >
-      {{ msg }}
-    </div>
-  </b-col>
-  <b-col cols="6">
-    <form @submit.prevent="adicionarSolicitacao">
-      <b-form-group
-        label="Resíduo:"
-        label-for="residuo"
-        label-cols-sm="12"
-        label-align-sm="left"
-      >
-        <select
-          @change="residuoClicado($event.target.value)"
-          id="residuo"
-          name="residuo"
+  <b-col cols="12" class="mt-5 mb-5 solicitacao">
+    <b-row>
+      <b-col cols="12">
+        <div
+          v-if="msg != ''"
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+          class="alert alert-info"
         >
-          <option>Selecione um Resíduo</option>
-          <option
-            v-bind:key="residuo.id_residuo"
-            v-for="residuo in listaResiduos"
-            :value="residuo.id_residuo"
-          >
-            {{ residuo.nm_residuo }}
-          </option>
-        </select>
-      </b-form-group>
-      <b-form-group
-        label="Material:"
-        label-for="material"
-        label-cols-sm="12"
-        label-align-sm="left"
-      >
-        <select
-          @change="materialClicado($event.target.value)"
-          id="material"
-          name="material"
+          {{ msg }}
+        </div>
+      </b-col>
+      <b-col md="6" order-sm="0" order-md="0">
+        <b-form-group
+          label="Resíduo:"
+          label-for="residuo"
+          label-cols-md="4"
+          label-align="left"
         >
-          <option>Selecione um Material</option>
-          <option
-            v-bind:key="material.id_residuo"
-            v-for="material in listaMateriais"
-            :value="material.nm_material"
+          <select
+            @change="residuoClicado($event.target.value)"
+            id="residuo"
+            name="residuo"
+            class="form-select"
           >
-            {{ material.nm_material }}
-          </option>
-        </select>
-      </b-form-group>
-      <b-form-group
-        :label="`Quantidade de Material ${sg_medida}`"
-        label-for="qt_material"
-        label-cols-sm="12"
-        label-align-sm="left"
-      >
-        <input
-          v-model="qt_material"
-          id="qt_material"
-          name="qt_material"
-          type="number"
-          min="1"
-          autocomplete="qt_material"
-          required
-        />
-      </b-form-group>
-      <div>
-        <button type="submit">Adicionar Material</button>
-      </div>
-    </form>
-  </b-col>
-  <b-col cols="6">
-    <div class="table-responsive">
-      <b-table
-        style="max-height: 400px; overflow-y: auto"
-        hover
-        :fields="fields"
-        :items="solicitacaos"
-      >
-        <template v-slot:cell(acao)="{ item }">
-          <span
-            ><b-button variant="danger" @click="remover(item)"
-              >Remover</b-button
-            ></span
+            <option>Selecione um Resíduo</option>
+            <option
+              v-bind:key="residuo.id_residuo"
+              v-for="residuo in listaResiduos"
+              :value="residuo.id_residuo"
+            >
+              {{ residuo.nm_residuo }}
+            </option>
+          </select>
+        </b-form-group>
+        <b-form-group
+          label="Material:"
+          label-for="material"
+          label-cols-md="4"
+          label-align="left"
+        >
+          <select
+            @change="materialClicado($event.target.value)"
+            id="material"
+            name="material"
+            class="form-select"
           >
-        </template>
-        <template v-slot:cell(qt_material)="{ item }">
-          <span>{{ item.qt_material }} {{ item.sg_medida }}</span>
-        </template>
-      </b-table>
-    </div>
-    <form @submit.prevent="enviarSolicitacao">
-      <button type="submit">Enviar Solicitacao</button>
-    </form>
+            <option>Selecione um Material</option>
+            <option
+              v-bind:key="material.id_residuo"
+              v-for="material in listaMateriais"
+              :value="material.nm_material"
+            >
+              {{ material.nm_material }}
+            </option>
+          </select>
+        </b-form-group>
+        <b-form-group
+          :label="`Peso ${sg_medida}`"
+          label-for="qt_material"
+          label-cols-md="4"
+          label-align="left"
+        >
+          <b-form-input
+            name="qt_material"
+            id="qt_material"
+            type="number"
+            min="0.01"
+            step="0.01"
+            v-model="qt_material"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <form @submit.prevent="adicionarSolicitacao">
+          <div style="display: grid">
+            <b-button variant="primary" type="submit"
+              >Adicionar Material</b-button
+            >
+          </div>
+        </form>
+      </b-col>
+      <b-col md="6" order-sm="2" order-md="2">
+        <div class="table-responsive">
+          <b-table
+            style="max-height: 400px; overflow-y: auto"
+            hover
+            :fields="fields"
+            :items="solicitacaos"
+          >
+            <template v-slot:cell(acao)="{ item }">
+              <span
+                ><b-button variant="danger" @click="remover(item)"
+                  >Remover</b-button
+                ></span
+              >
+            </template>
+            <template v-slot:cell(qt_material)="{ item }">
+              <span>{{ item.qt_material }} {{ item.sg_medida }}</span>
+            </template>
+          </b-table>
+        </div>
+      </b-col>
+      <b-col md="6" order-sm="1" order-md="2"> </b-col>
+      <b-col md="6" order-sm="3" order-md="3">
+        <form @submit.prevent="enviarSolicitacao">
+          <div style="display: grid">
+            <b-button variant="success" type="submit"
+              >Enviar Solicitação</b-button
+            >
+          </div>
+        </form>
+      </b-col>
+    </b-row>
   </b-col>
 </template>
 
@@ -124,7 +139,7 @@ export default class GerarSolicitacao extends Vue {
   private id_residuo: number = 0;
   public materiais: Array<any> = [];
   private nm_material: string = "";
-  public qt_material: number = 0;
+  public qt_material: number = 0.01;
   public solicitacaos: Array<any> = [];
   private sg_medida: string = "";
   public fields: Array<any> = [
@@ -133,6 +148,7 @@ export default class GerarSolicitacao extends Vue {
     { key: "acao", label: "" },
   ];
   public msg: string = "";
+  public variant: string = "";
 
   get user(): User | null {
     return this.userModule.user;
@@ -170,6 +186,7 @@ export default class GerarSolicitacao extends Vue {
 
   public materialClicado(id: string) {
     this.nm_material = id;
+    this.sg_medida = "";
     this.materiais.forEach((value) => {
       if (value.nm_material === id) {
         this.sg_medida = value.sg_medida;
@@ -197,6 +214,8 @@ export default class GerarSolicitacao extends Vue {
       this.nm_material === "" ||
       this.nm_material === "Selecione um Material"
     ) {
+      this.msg = "Você deve selecionar um material.";
+      this.variant = "alert alert-info";
       return;
     }
 
@@ -204,7 +223,14 @@ export default class GerarSolicitacao extends Vue {
       (material) => material.nm_material === this.nm_material
     );
     if (!materialExistente) {
-      console.error("Material não encontrado na lista de materiais.");
+      this.msg = "Material não encontrado na lista de materiais.";
+      this.variant = "alert alert-warning";
+      return;
+    }
+
+    if (this.qt_material.toString() == "0") {
+      this.msg = "O peso do material não pode ser <b>0</b>.";
+      this.variant = "alert alert-warning";
       return;
     }
 
@@ -215,7 +241,9 @@ export default class GerarSolicitacao extends Vue {
       sg_medida: this.sg_medida,
     };
     this.solicitacaos.push(solicitacao);
-    console.log(this.solicitacaos);
+
+    this.msg = "";
+    this.variant = "";
   }
 
   enviarSolicitacao() {
@@ -225,6 +253,7 @@ export default class GerarSolicitacao extends Vue {
     }
     if (this.solicitacaos.length === 0) {
       this.msg = "Você deve inserir algum material para uma solicitação.";
+      this.variant = "alert alert-warning";
       return;
     }
     UserService.enviarSolicitacao(chave, this.solicitacaos).then(
@@ -232,6 +261,7 @@ export default class GerarSolicitacao extends Vue {
         console.log(data);
         if (data.codigo === "inserido") {
           this.msg = "Solicitação enviada com sucesso!";
+          this.variant = "alert alert-success";
         }
       }
     );
@@ -254,5 +284,14 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.solicitacao {
+  background-color: #fff;
+  padding-top: 15pt;
+  padding-bottom: 15pt;
+  box-shadow: 0px 0px 20px 0px #eee;
+  border: 1px solid #e9e9e9 !important;
+  border-radius: 10px !important;
 }
 </style>

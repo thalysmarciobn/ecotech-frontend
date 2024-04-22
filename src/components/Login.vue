@@ -77,7 +77,7 @@ export default class Login extends Vue {
   async login() {
     const dado = await UserService.logar(this.email, this.password);
     if (dado.data.codigo == "logado") {
-      this.$store.commit("user/SET_USER", dado.data.usuario);
+      this.userModule.setUser(dado.data.usuario);
       this.$cookies.set("chave", dado.data.chave, "24h");
       this.$router.push("painel");
     }
