@@ -1,10 +1,5 @@
 <template>
-  <PainelHeader></PainelHeader>
-  <b-container id="app-eco">
-    <b-row>
-      <router-view></router-view>
-    </b-row>
-  </b-container>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
