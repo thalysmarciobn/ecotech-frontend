@@ -91,6 +91,55 @@ class UserService {
     return response.data;
   }
 
+  async adicionarEndereco(
+    chave: string,
+    id_endereco: string,
+    nm_estado: string,
+    nm_cidade: string,
+    nm_cep: string,
+    nm_bairro: string,
+    nm_rua: string,
+    nm_complemento: string,
+    nu_casa: number
+  ): Promise<any> {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${chave}`,
+      },
+    };
+    const params = new URLSearchParams();
+    params.append("id_endereco", id_endereco);
+    params.append("nm_estado", nm_estado);
+    params.append("nm_cidade", nm_cidade);
+    params.append("nm_cep", nm_cep);
+    params.append("nm_bairro", nm_bairro);
+    params.append("nm_rua", nm_rua);
+    params.append("nm_complemento", nm_complemento);
+    params.append("nu_casa", nu_casa.toString());
+    const response = await axios.post<any>(
+      `${API_URL}/adicionarEndereco`,
+      params,
+      config
+    );
+    return response.data;
+  }
+
+  async removerEndereco(chave: string, id_endereco: string): Promise<any> {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${chave}`,
+      },
+    };
+    const params = new URLSearchParams();
+    params.append("id_endereco", id_endereco);
+    const response = await axios.post<any>(
+      `${API_URL}/removerEndereco`,
+      params,
+      config
+    );
+    return response.data;
+  }
+
   logar(
     email: string,
     senha: string
@@ -150,7 +199,7 @@ class UserService {
     const params = new URLSearchParams();
     params.append("lista_materiais", JSON.stringify(lista));
     const response = await axios.post<any>(
-      `http://localhost:8000/api/solicitacoes/adicionar`,
+      `${API_URL}/adicionarSolicitacao`,
       params,
       config
     );

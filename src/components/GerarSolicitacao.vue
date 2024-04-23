@@ -13,6 +13,7 @@
         </div>
       </b-col>
       <b-col md="6" order-sm="0" order-md="0">
+        <h2 class="mb-4">Gerar Solicitação de Entrega</h2>
         <b-form-group
           label="Resíduo:"
           label-for="residuo"
@@ -75,7 +76,7 @@
         </b-form-group>
         <form @submit.prevent="adicionarSolicitacao">
           <div style="display: grid">
-            <b-button variant="primary" type="submit"
+            <b-button variant="outline-primary" type="submit" size="lg"
               >Adicionar Material</b-button
             >
           </div>
@@ -91,7 +92,10 @@
           >
             <template v-slot:cell(acao)="{ item }">
               <span
-                ><b-button variant="danger" @click="remover(item)"
+                ><b-button
+                  variant="outline-danger"
+                  @click="remover(item)"
+                  size="sm"
                   >Remover</b-button
                 ></span
               >
@@ -106,7 +110,7 @@
       <b-col md="6" order-sm="3" order-md="3">
         <form @submit.prevent="enviarSolicitacao">
           <div style="display: grid">
-            <b-button variant="success" type="submit"
+            <b-button variant="outline-success" type="submit" size="lg"
               >Enviar Solicitação</b-button
             >
           </div>

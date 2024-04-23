@@ -63,11 +63,14 @@
       :items="dados"
       :fields="fields"
     >
+      <template v-slot:cell(nm_codigo)="{ item }">
+        <b>{{ item.nm_codigo }}</b>
+      </template>
       <template v-slot:cell(vl_status)="{ item }">
         <span>
-          <template v-if="item.vl_status === 0"> Pendente </template>
-          <template v-if="item.vl_status === 1"> Aceito </template>
-          <template v-if="item.vl_status === -1"> Negado </template>
+          <p style="color: #ffa500" v-if="item.vl_status === 0">Pendente</p>
+          <p style="color: #00ab25" v-if="item.vl_status === 1">Aceito</p>
+          <p style="color: #eb3f18" v-if="item.vl_status === -1">Negado</p>
         </span>
       </template>
       <template v-slot:cell(qt_material)="{ item }">
@@ -100,9 +103,9 @@ export default class Painel extends Vue {
   public dados: Array<any> = [];
   public fields: Array<any> = [
     { key: "nm_codigo", label: "Código" },
+    { key: "vl_status", label: "Status" },
     { key: "nm_material", label: "Material" },
     { key: "qt_material", label: "Quantidade" },
-    { key: "vl_status", label: "Status" },
     { key: "dt_solicitacao", label: "Data de Solicitação" },
   ];
   private paginaTotal: number = 1;
@@ -158,12 +161,22 @@ export default class Painel extends Vue {
         this.porPagina,
         this.pesquisa
       ).then((data: any) => {
-        console.log(data);
         if (data.codigo == "recebido") {
           this.paginaTotal = data.dados.total_paginas;
           this.proximaPagina = data.dados.proxima_pagina;
           this.pagina = data.dados.pagina;
-          this.dados = [...this.dados, ...data.dados.lista];
+
+          let newData = data.dados.lista.filter((item: any) => {
+            let alreadyExists = false;
+            this.dados.forEach((existingItem) => {
+              if (existingItem.id_solicitacao === item.id_solicitacao) {
+                alreadyExists = true;
+              }
+            });
+            return !alreadyExists;
+          });
+
+          this.dados = [...this.dados, ...newData];
         }
         this.carregando = false;
       });

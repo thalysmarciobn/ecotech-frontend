@@ -1,16 +1,23 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" class="navbar" variant="green">
+  <b-navbar
+    class="navbar"
+    variant="green"
+    toggleable="lg"
+    type="dark"
+    sticky="true"
+  >
     <b-navbar-brand>EcoTech</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
+      <b-navbar-nav fill>
         <b-nav-item class="navbar-link" to="/painel">Relatórios</b-nav-item>
         <b-nav-item to="/gerar-solicitacao">Gerar Solicitação</b-nav-item>
         <b-nav-item to="/produtos">Loja de Produtos</b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav class="ml-auto">
+
+      <b-navbar-nav class="ml-auto" justified v-if="usuario">
         <b-nav-item
           >Saldo: <b>{{ formatarNumero(saldoEco) }}</b></b-nav-item
         >

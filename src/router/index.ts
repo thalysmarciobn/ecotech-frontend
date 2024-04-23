@@ -53,31 +53,11 @@ const userModule = getModule(UserModule, store);
 
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    const cookies = document.cookie
-      .split(";")
-      .map((cookie) => cookie.trim().split("="));
-    const chave = cookies.find(([key]) => key === "chave");
-
-    if (chave) {
-      const valorChave = chave[1];
-
-      try {
-        const data: ChecarUsuario = await UserService.checar(valorChave);
-
-        if (data.codigo === "logado") {
-          userModule.setUser(data.usuario);
-          next();
-          return;
-        }
-      } catch (error) {
-        console.error("Erro ao verificar autenticação:", error);
-      }
+    if (userModule.user == null) {
+      next({ name: "Login" });
+      return;
     }
-
-    next({ name: "Login" });
-    return;
   }
-
   next();
 });
 

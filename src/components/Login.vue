@@ -74,7 +74,7 @@ export default class Login extends Vue {
   email: string = "";
   password: string = "";
 
-  async created(): Promise<void> {
+  async mounted(): Promise<void> {
     const chave = this.$cookies.get("chave");
     if (!chave) {
       return;
