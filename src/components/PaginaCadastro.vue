@@ -3,7 +3,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
-          <div class="card card-registration my-4">
+          <div class="card card-cadastro my-4">
             <div class="row g-0">
               <div class="col-xl-6 d-none d-xl-block">
                 <img
@@ -44,6 +44,15 @@
                       </div>
                     </div>
                   </div>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label" for="email">E-mail</label>
+                    <b-form-input
+                      id="email"
+                      type="text"
+                      size="lg"
+                      required
+                    ></b-form-input>
+                  </div>
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
@@ -69,15 +78,6 @@
                         ></b-form-input>
                       </div>
                     </div>
-                  </div>
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label" for="email">E-mail</label>
-                    <b-form-input
-                      id="email"
-                      type="text"
-                      size="lg"
-                      required
-                    ></b-form-input>
                   </div>
 
                   <hr class="hr" />
