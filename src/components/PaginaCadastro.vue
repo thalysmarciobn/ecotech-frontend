@@ -20,7 +20,7 @@
                   <h2 class="mb-4 text-uppercase">Cadastre-se</h2>
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="nome">Nome</label>
                         <b-form-input
                           id="nome"
@@ -31,7 +31,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="sobrenome"
                           >Sobrenome</label
                         >
@@ -44,7 +44,7 @@
                       </div>
                     </div>
                   </div>
-                  <div data-mdb-input-init class="form-outline mb-4">
+                  <div class="form-outline mb-4">
                     <label class="form-label" for="email">E-mail</label>
                     <b-form-input
                       id="email"
@@ -55,7 +55,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="senha">Senha</label>
                         <b-form-input
                           id="senha"
@@ -66,7 +66,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="resenha"
                           >Repetir Senha</label
                         >
@@ -84,7 +84,7 @@
 
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="cep">CEP</label>
                         <b-form-input
                           id="cep"
@@ -95,7 +95,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="rua">Rua</label>
                         <b-form-input
                           id="rua"
@@ -106,7 +106,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="bairro">Bairro</label>
                         <b-form-input
                           id="bairro"
@@ -117,7 +117,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="cidade">Cidade</label>
                         <b-form-input
                           id="cidade"
@@ -128,7 +128,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="estado">Estado</label>
                         <b-form-input
                           id="estado"
@@ -139,7 +139,7 @@
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="casa">N º Casa</label>
                         <b-form-input
                           id="casa"
@@ -150,7 +150,7 @@
                       </div>
                     </div>
                     <div class="col-md-12 mb-4">
-                      <div data-mdb-input-init class="form-outline">
+                      <div class="form-outline">
                         <label class="form-label" for="complemento"
                           >Complemento</label
                         >
