@@ -108,7 +108,12 @@ export default class Produtos extends Vue {
   }
 
   adicionarCarrinho(item: any) {
-    this.carrinho.push(item);
+    const produtoExistente = this.carrinho.find(
+      (produto) => produto.id_produto === item.id_produto
+    );
+    if (!produtoExistente) {
+      this.carrinho.push(item);
+    }
   }
 
   async comprar() {
