@@ -3,7 +3,7 @@ import LoginResult from "@/types/LoginResult";
 import User from "@/types/User";
 import axios, { AxiosResponse } from "axios";
 
-const API_URL = "http://localhost:8000/api/usuario";
+const API_URL = "http://192.168.0.135:8000/api/usuario";
 
 class UserService {
   async checar(chave: string): Promise<ChecarUsuario> {
@@ -151,6 +151,33 @@ class UserService {
     return axios.post<LoginResult>(`${API_URL}/logar`, params);
   }
 
+  cadastrar(
+    nome: string,
+    email: string,
+    senha: string,
+    cep: string,
+    bairro: string,
+    cidade: string,
+    estado: string,
+    rua: string,
+    casa: number,
+    complemento: string
+  ): Promise<any> {
+    const params = new URLSearchParams();
+    params.append("nm_usuario", nome);
+    params.append("nm_email", email);
+    params.append("nm_senha", senha);
+    params.append("nm_cep", cep);
+    params.append("nm_bairro", bairro);
+    params.append("nm_cidade", cidade);
+    params.append("nm_estado", estado);
+    params.append("nm_rua", rua);
+    params.append("nu_casa", casa.toString());
+    params.append("nm_complemento", complemento);
+
+    return axios.post<LoginResult>(`${API_URL}/cadastrar`, params);
+  }
+
   async residuos(chave: string): Promise<any> {
     const config = {
       headers: {
@@ -158,7 +185,7 @@ class UserService {
       },
     };
     const response = await axios.get<any>(
-      "http://localhost:8000/api/residuos/lista",
+      "http://192.168.0.135:8000/api/residuos/lista",
       config
     );
     return response.data;
@@ -171,7 +198,7 @@ class UserService {
       },
     };
     const response = await axios.get<any>(
-      "http://localhost:8000/api/produtos/lista",
+      "http://192.168.0.135:8000/api/produtos/lista",
       config
     );
     return response.data;
@@ -184,7 +211,7 @@ class UserService {
       },
     };
     const response = await axios.get<any>(
-      `http://localhost:8000/api/materiais/obter?id_residuo=${nome}`,
+      `http://192.168.0.135:8000/api/materiais/obter?id_residuo=${nome}`,
       config
     );
     return response.data;
@@ -215,7 +242,7 @@ class UserService {
     const params = new URLSearchParams();
     params.append("lista_produtos", JSON.stringify(lista));
     const response = await axios.post<any>(
-      `http://localhost:8000/api/produtos/comprar`,
+      `http://192.168.0.135:8000/api/produtos/comprar`,
       params,
       config
     );

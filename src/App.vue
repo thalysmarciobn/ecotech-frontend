@@ -1,10 +1,15 @@
 <template>
-  <PainelHeader></PainelHeader>
-  <b-container id="app-eco">
-    <b-row>
-      <router-view></router-view>
-    </b-row>
-  </b-container>
+  <PainelHeader v-if="!terPainel"></PainelHeader>
+  <template v-if="naHome || noCadastro || noLogin">
+    <router-view></router-view>
+  </template>
+  <template v-else>
+    <b-container id="app-eco">
+      <b-row>
+        <router-view></router-view>
+      </b-row>
+    </b-container>
+  </template>
 </template>
 
 <script lang="ts">
@@ -26,6 +31,23 @@ export default class App extends Vue {
 
   get user(): User | null {
     return this.userModule.user;
+  }
+
+  get naHome(): boolean {
+    return this.$route.fullPath === "/";
+  }
+
+  get noCadastro(): boolean {
+    return this.$route.fullPath === "/cadastro";
+  }
+
+  get noLogin(): boolean {
+    return this.$route.fullPath === "/login";
+  }
+
+  get terPainel(): boolean {
+    const rota: String = this.$route.fullPath;
+    return rota === "/" || rota === "/login" || rota === "/cadastro";
   }
 }
 </script>

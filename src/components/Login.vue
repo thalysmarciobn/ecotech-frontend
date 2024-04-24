@@ -1,8 +1,22 @@
 <template>
-  <section class="h-100">
-    <div class="container py-5 h-100">
+  <section class="bg-image h-100" style="height: 100vh !important">
+    <div class="container py-5">
       <div class="row d-flex justify-content-center align-items-center h-100">
+        <h1 class="text-center">
+          <span class="leaf-icon">&#127810;</span
+          ><span class="eco-tech-name">ECOTECH</span>
+        </h1>
         <div class="col-md-6">
+          <b-col v-if="msg != ''" cols="12">
+            <div
+              role="alert"
+              aria-live="polite"
+              aria-atomic="true"
+              class="mb-2 mt-3 alert alert-info"
+            >
+              {{ msg }}
+            </div>
+          </b-col>
           <div class="card card-cadastro my-4">
             <div class="row g-0">
               <div class="login-pd">
@@ -35,13 +49,21 @@
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-end pt-3">
+                  <div class="d-flex justify-content-center pt-3">
                     <b-button
                       variant="outline-success"
                       type="submit"
                       size="lg"
                       style="min-width: 120pt"
                       >Logar</b-button
+                    >
+                  </div>
+                  <div class="text-center mt-4">
+                    <a
+                      >Você não possui uma conta?
+                      <RouterLink to="/cadastro"
+                        >Cadastre-se aqui.</RouterLink
+                      ></a
                     >
                   </div>
                 </form>
@@ -70,8 +92,10 @@ import ChecarUsuario from "@/types/ChecarUsuario";
 export default class Login extends Vue {
   private userModule: UserModule = getModule(UserModule, store);
 
-  email: string = "";
-  password: string = "";
+  public email: string = "";
+  public password: string = "";
+  public msg: string = "";
+  public variant: string = "";
 
   async mounted(): Promise<void> {
     const chave = this.$cookies.get("chave");
@@ -91,12 +115,14 @@ export default class Login extends Vue {
       this.userModule.setUser(dado.data.usuario);
       this.$cookies.set("chave", dado.data.chave, "24h");
       this.$router.push("painel");
+    } else {
+      this.msg = "Dados não encontrado.";
+      this.variant = "alert alert-info";
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
@@ -114,5 +140,15 @@ a {
 }
 .login-pd {
   padding: 25px;
+}
+.bg-image {
+  background-image: url("https://grupoaltotiete.com.br/wp-content/uploads/2023/11/Grupo-Alto-Tiete-Reciclagem-7-perguntas-comuns-para-comecar.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+.eco-tech-name {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 </style>

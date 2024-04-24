@@ -23,7 +23,6 @@
         >
         <b-nav-item-dropdown :text="bemVindo" right>
           <b-dropdown-item to="/enderecos">Endereços</b-dropdown-item>
-          <b-dropdown-item to="/configuracoes">Configurações</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item @click="mudarSair()">Sair</b-dropdown-item>
         </b-nav-item-dropdown>

@@ -73,6 +73,12 @@
           <p style="color: #eb3f18" v-if="item.vl_status === -1">Negado</p>
         </span>
       </template>
+      <template v-slot:cell(vl_ecorecebido)="{ item }">
+        <span style="display: grid">
+          <span>ECO: {{ formatarNumero(item.vl_ecorecebido, 2) }}</span>
+          <span>R$: {{ formatarNumero(item.vl_realrecebido, 2) }}</span>
+        </span>
+      </template>
       <template v-slot:cell(qt_material)="{ item }">
         <span>{{ item.qt_material }} {{ item.sg_medida }}</span>
       </template>
@@ -106,6 +112,7 @@ export default class Painel extends Vue {
     { key: "vl_status", label: "Status" },
     { key: "nm_material", label: "Material" },
     { key: "qt_material", label: "Quantidade" },
+    { key: "vl_ecorecebido", label: "Valores Recebido" },
     { key: "dt_solicitacao", label: "Data de Solicitação" },
   ];
   private paginaTotal: number = 1;

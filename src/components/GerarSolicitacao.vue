@@ -149,6 +149,7 @@ export default class GerarSolicitacao extends Vue {
   public fields: Array<any> = [
     { key: "nm_material", label: "Material" },
     { key: "qt_material", label: "Quantidade" },
+    { key: "vl_eco", label: "Valor ECO" },
     { key: "acao", label: "" },
   ];
   public msg: string = "";
@@ -238,10 +239,15 @@ export default class GerarSolicitacao extends Vue {
       return;
     }
 
+    const material = this.materiais.find((obj: any) => {
+      return obj.nm_material === this.nm_material;
+    });
+
     let solicitacao = {
       id_residuo: this.id_residuo,
       nm_material: this.nm_material,
       qt_material: this.qt_material,
+      vl_eco: material.vl_eco * this.qt_material,
       sg_medida: this.sg_medida,
     };
     this.solicitacaos.push(solicitacao);
