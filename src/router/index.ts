@@ -19,6 +19,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: false },
   },
   {
+    path: "/cadastro",
+    name: "PaginaCadastro",
+    component: () => import("../components/PaginaCadastro.vue"),
+    meta: { requiresAuth: false },
+  },
+  {
     path: "/painel",
     name: "Painel",
     component: () => import("../components/Painel.vue"),
